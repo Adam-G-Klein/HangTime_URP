@@ -18,13 +18,14 @@ public class DrawLines : MonoBehaviour
     private GameObject lastObjectHit = null;
     private Vector3 grapplePoint;
     private Vector3 grappleDir;
-    public float aimAssit = 2f;
+    public float aimAssist = 2f;
     private bool grappling = false;
     private Rigidbody PlayerRB;
     public Material[] SelectedMaterial;
     public Material[] UnselectedMaterial;
     private LevelController levelController;
     private bool gameStarted = false;
+    private GameObject grappleTarget;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +67,7 @@ public class DrawLines : MonoBehaviour
         bool somethingHit = false;
         hit = Physics.RaycastAll(CameraTransform.position, retDir, range);
         if(hit.Length == 0){
-            hit = Physics.SphereCastAll(CameraTransform.position, aimAssit, retDir, range);
+            hit = Physics.SphereCastAll(CameraTransform.position, aimAssist, retDir, range);
         }
         if(hit != null)
         //if(Physics.SphereCast(CameraTransform.position, .5f, retDir, out hit, range))
@@ -90,7 +91,7 @@ public class DrawLines : MonoBehaviour
                         }
                         lastObjectHit = curObjectHit;
                         grapplePoint = rHit.point;
-                        hitTransform .GetComponent<MeshRenderer>().materials = SelectedMaterial;
+                        hitTransform.GetComponent<MeshRenderer>().materials = SelectedMaterial;
                     }
                 }
             }
@@ -107,7 +108,7 @@ public class DrawLines : MonoBehaviour
     }
     private void Shoot()
     {
-        
+        grappleTarget = lastObjectHit;
         levelController.CheckLevelUpdate(lastObjectHit);
         if(newLineGen)
         {
@@ -151,6 +152,13 @@ public class DrawLines : MonoBehaviour
     public void setGameStarted(bool status)
     {
         gameStarted = status;
-        Debug.Log(gameStarted);
+    }
+    public void setAimAssist(float value)
+    {
+        aimAssist = value;
+    }
+    public string getCurrentGrapplingTarget()
+    {
+        return grappleTarget.name;
     }
 }

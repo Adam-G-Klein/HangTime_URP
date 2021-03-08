@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.tag == "Finish")
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().restartGame();
+            GameObject.Find("GameManager").GetComponent<GameManager>().showEndScreen();
         }
         if(other.gameObject.tag == "Water")
         {
@@ -38,13 +38,26 @@ public class PlayerController : MonoBehaviour
         }
     }
     private void OnTriggerEnter(Collider other) {
+        Debug.Log(other.gameObject.tag);
         if(other.gameObject.tag == "Sphere")
         {
             GameObject GM = GameObject.Find("GrappleManager");
-            GM.GetComponent<DrawLines>().stopGrappling();
-            other.gameObject.SetActive(false);
-            ParticleSystem ps = GameObject.Instantiate(sphereParticles, other.gameObject.transform.position, other.gameObject.transform.rotation);
-            Destroy(ps.gameObject, 1f);
+
+            // This if statement ensures that you actually make it to the sphere you grapple to
+            // otherwise you would be brought out of your grapple by any spheres in the way which
+            // feels misleading.
+            if(other.gameObject.name == GM.GetComponent<DrawLines>().getCurrentGrapplingTarget())
+            {
+                GM.GetComponent<DrawLines>().stopGrappling();
+                other.gameObject.SetActive(false);
+                ParticleSystem ps = GameObject.Instantiate(sphereParticles, other.gameObject.transform.position, other.gameObject.transform.rotation);
+                Destroy(ps.gameObject, 1f);
+            }
+        }
+        else
+        {
+            Debug.Log("here");
+            GameObject.Find("GameManager").GetComponent<GameManager>().showEndScreen();
         }
     }
 
