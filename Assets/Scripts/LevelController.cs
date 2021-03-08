@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour
     private GameObject curObject;
     private Vector3 spawnLocation;
     [SerializeField]
-    private Vector3 spawnOffset = new Vector3(0, .25f, 0);
+    private Vector3 spawnOffset = new Vector3(0, 2f, 0);
     private GameObject player;
     public float deathOffset = 10f;
     private AudioManager audioManager;
@@ -55,8 +55,8 @@ public class LevelController : MonoBehaviour
         }
         
         // Respawns the player at the current spawn location
-        player.transform.position = spawnLocation;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        player.transform.position = spawnLocation;
 
     }
     // current Measure of death for player is if they fall a certain distanec below the platform
