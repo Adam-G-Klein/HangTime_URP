@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody rb;
     public ParticleSystem sphereParticles;
+    private LevelController levelController;
     
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
     }
     
     void Update()
@@ -29,6 +31,10 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "Finish")
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().restartGame();
+        }
+        if(other.gameObject.tag == "Water")
+        {
+            levelController.ResetCurrentLevel();
         }
     }
     private void OnTriggerEnter(Collider other) {

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && grappleManager.GetComponent<DrawLines>().getGameStarted())
         {
+
             setGamePaused();
         }
     }
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     }
     public void startGame()
     {
+        Cursor.visible = false;
         inGameUI.SetActive(true);
         startMenu.SetActive(false);
         controls.SetActive(false);
@@ -67,6 +69,8 @@ public class GameManager : MonoBehaviour
     }
     public void setGamePaused()
     {
+
+        Cursor.visible = false;
         inGameUI.SetActive(false);
         startMenu.SetActive(false);
         controls.SetActive(false);
