@@ -26,7 +26,7 @@ public class DrawLines : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
+        levelController = GameObject.Find("LevelController").GetComponent<LevelController>();
         //SpawnLineGenerator();
         gameStarted = true;
     }

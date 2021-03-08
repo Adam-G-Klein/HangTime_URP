@@ -18,13 +18,6 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (isGrounded)
-        {
-            if (Input.GetButtonDown("Jump"))
-                {
-                    rb.AddForce(Vector3.up * jumpHeight);
-                }
-        }
     }
     
     void OnCollisionEnter(Collision other)
@@ -33,6 +26,10 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+        if(other.gameObject.tag == "Finish")
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().restartGame();
+        }
     }
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Sphere")
@@ -40,7 +37,8 @@ public class PlayerController : MonoBehaviour
             GameObject GM = GameObject.Find("GrappleManager");
             GM.GetComponent<DrawLines>().stopGrappling();
             other.gameObject.SetActive(false);
-            Instantiate(sphereParticles, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            ParticleSystem ps = GameObject.Instantiate(sphereParticles, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            Destroy(ps.gameObject, 1f);
         }
     }
 
