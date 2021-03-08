@@ -6,6 +6,7 @@ public class DrawLines : MonoBehaviour
 {
     [SerializeField]
     private GameObject LineGeneratorPrefab;
+    private AudioManager audioManager;
     public Transform PlayerTransform;
     public Transform CameraTransform;
     public Transform reticalPosition;
@@ -27,6 +28,7 @@ public class DrawLines : MonoBehaviour
     void Start()
     {
         levelController = GameObject.Find("LevelController").GetComponent<LevelController>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         //SpawnLineGenerator();
         gameStarted = true;
     }
@@ -43,6 +45,7 @@ public class DrawLines : MonoBehaviour
             DetectPossibleGrapple(retDir);
             if(Input.GetButtonDown("Fire1") && lastObjectHit)
             {
+                audioManager.grappleSounds();
                 Shoot();
                 UseGrappleForce();
                 grappling = true;
@@ -103,6 +106,7 @@ public class DrawLines : MonoBehaviour
     }
     private void Shoot()
     {
+        
         levelController.CheckLevelUpdate(lastObjectHit);
         if(newLineGen)
         {

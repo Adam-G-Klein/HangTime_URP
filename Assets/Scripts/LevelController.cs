@@ -12,8 +12,10 @@ public class LevelController : MonoBehaviour
     private Vector3 spawnOffset = new Vector3(0, .25f, 0);
     private GameObject player;
     public float deathOffset = 10f;
+    private AudioManager audioManager;
     void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         curLevel = GameObject.Find("Level1");
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -27,6 +29,7 @@ public class LevelController : MonoBehaviour
         GameObject nextLevel = GO.transform.parent.gameObject;
         if(!nextLevel.name.Equals(curLevel.name))
         {
+            audioManager.nextChord();
             curLevel.transform.Find("StartingPlatform").transform.gameObject.SetActive(false);
             curLevel = nextLevel;
             
