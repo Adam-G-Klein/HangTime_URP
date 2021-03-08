@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject pause;
     public Slider senseSlider;
     private GameObject grappleManager;
+    private string previousScreen;
     void Start()
     {
         resetGame();
@@ -39,8 +40,9 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(false);
         startMenu.SetActive(true);
         controls.SetActive(false);
-        pause.SetActive(false);              
-        SceneManager.LoadScene("SampleScene");
+        pause.SetActive(false);
+        Scene scene = SceneManager.GetActiveScene();              
+        SceneManager.LoadScene(scene.name);
     }
     public void startGame()
     {
@@ -53,8 +55,17 @@ public class GameManager : MonoBehaviour
         grappleManager.GetComponent<DrawLines>().setGameStarted(true);
         Time.timeScale = 1.0f; 
     }
-    public void showControlMenu()
+    public void showControlMenuFromStartMenu()
     {
+        previousScreen = "start";
+        inGameUI.SetActive(false);
+        startMenu.SetActive(false);
+        controls.SetActive(true);
+        pause.SetActive(false);              
+    }
+    public void showControlMenuFromPauseMenu()
+    {
+        previousScreen = "pause";
         inGameUI.SetActive(false);
         startMenu.SetActive(false);
         controls.SetActive(true);
@@ -62,10 +73,21 @@ public class GameManager : MonoBehaviour
     }
     public void leaveControlMenu()
     {
-        inGameUI.SetActive(false);
-        startMenu.SetActive(true);
-        controls.SetActive(false);
-        pause.SetActive(false);                    
+        if(previousScreen.Equals("start"))
+        {
+            inGameUI.SetActive(false);
+            startMenu.SetActive(true);
+            controls.SetActive(false);
+            pause.SetActive(false);  
+        }
+        else
+        {
+            inGameUI.SetActive(false);
+            startMenu.SetActive(false);
+            controls.SetActive(false);
+            pause.SetActive(true);             
+        }
+                  
     }
     public void setGamePaused()
     {
