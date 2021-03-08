@@ -8,16 +8,19 @@ public class LevelController : MonoBehaviour
     private GameObject curLevel;
     private GameObject curObject;
     private Vector3 spawnLocation;
-    private Vector3 spawnOffset = new Vector3(0, .5f, 0);
+    private Vector3 spawnOffset = new Vector3(0, .25f, 0);
+    private GameObject player;
+    public float deathOffset = 10f;
     void Start()
     {
         curLevel = GameObject.Find("Level1");
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        checkPlayerHeight();
     }
     public void CheckLevelUpdate(GameObject GO){
         // if the object is under a new parent this means the player has gotten to a new level
@@ -53,5 +56,15 @@ public class LevelController : MonoBehaviour
         Player.transform.position = spawnLocation;
         Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+    }
+    // current Measure of death for player is if they fall a certain distanec below the platform
+    // for the level they are currently on. This call can later be made when they hit the water
+    public void checkPlayerHeight() {
+        if (player.transform.position.y < (spawnLocation.y - spawnOffset.y - deathOffset))
+        {
+            player.transform.GetComponent<Rigidbody>().freezeRotation = true;
+            ResetCurrentLevel(curLevel);
+            //player.transform.GetComponent<Rigidbody>().freezeRotation = false;
+        } 
     }
 }

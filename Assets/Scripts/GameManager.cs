@@ -8,16 +8,19 @@ public class GameManager : MonoBehaviour
     public GameObject inGameUI;
     public GameObject startMenu;
     public GameObject controls;
+    public GameObject pause;
     public Slider senseSlider;
+    private GameObject grappleManager;
     void Start()
     {
         resetGame();
+        grappleManager = GameObject.Find("GrappleManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && grappleManager.GetComponent<DrawLines>().getGameStarted())
         {
             setGamePaused();
         }
@@ -27,13 +30,15 @@ public class GameManager : MonoBehaviour
     {
         inGameUI.SetActive(false);
         startMenu.SetActive(true);
-        controls.SetActive(false);      
+        controls.SetActive(false);
+        pause.SetActive(false);            
     }
     public void restartGame()
     {
         inGameUI.SetActive(false);
         startMenu.SetActive(true);
-        controls.SetActive(false);  
+        controls.SetActive(false);
+        pause.SetActive(false);              
         SceneManager.LoadScene("SampleScene");
     }
     public void startGame()
@@ -41,8 +46,9 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(true);
         startMenu.SetActive(false);
         controls.SetActive(false);
+        pause.SetActive(false);              
         // wherever actual game loop is
-        GameObject.Find("GrappleManager").GetComponent<DrawLines>().setGameStarted(true);
+        grappleManager.GetComponent<DrawLines>().setGameStarted(true);
         Time.timeScale = 1.0f; 
     }
     public void showControlMenu()
@@ -50,24 +56,31 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(false);
         startMenu.SetActive(false);
         controls.SetActive(true);
+        pause.SetActive(false);              
     }
     public void leaveControlMenu()
     {
         inGameUI.SetActive(false);
         startMenu.SetActive(true);
-        controls.SetActive(false);       
+        controls.SetActive(false);
+        pause.SetActive(false);                    
     }
     public void setGamePaused()
     {
         inGameUI.SetActive(false);
-        startMenu.SetActive(true);
+        startMenu.SetActive(false);
         controls.SetActive(false);
+        pause.SetActive(true);          
         // wherever actual game loop is
-        GameObject.Find("GrappleManager").GetComponent<DrawLines>().setGameStarted(false);   
+        grappleManager.GetComponent<DrawLines>().setGameStarted(false);   
         Time.timeScale = 0.0f;
     }
     public void updateSensitivity()
     {
         GameObject.Find("Main Camera").GetComponent<ActionCameraController>().setSensitivity(senseSlider.value);   
+    }
+    public void quitGame()
+    {
+        Application.Quit();
     }
 }

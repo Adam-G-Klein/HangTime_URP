@@ -12,7 +12,7 @@ public class DrawLines : MonoBehaviour
     public int rayLength;
     private GameObject newLineGen;
     private LineRenderer lRend;
-    public float range = 1f;
+    public float range = 30f;
     private GameObject lastObjectHit = null;
     private Vector3 grapplePoint;
     private Vector3 grappleDir;
@@ -86,8 +86,7 @@ public class DrawLines : MonoBehaviour
                         }
                         lastObjectHit = curObjectHit;
                         grapplePoint = rHit.point;
-                        MeshRenderer mr = hitTransform.GetComponent<MeshRenderer>();
-                        mr.materials = SelectedMaterial;
+                        hitTransform .GetComponent<MeshRenderer>().materials = SelectedMaterial;
                     }
                 }
             }
