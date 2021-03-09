@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     public void setGamePaused()
     {
 
-        Cursor.visible = false;
+        Cursor.visible = true;
         inGameUI.SetActive(false);
         startMenu.SetActive(false);
         controls.SetActive(false);
