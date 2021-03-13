@@ -47,7 +47,6 @@ public class ActionCameraController : MonoBehaviour
             
             //angleOfRotation += mouseY;
             float angle = transform.eulerAngles.x;
-            Debug.Log("camera eulers: " + transform.eulerAngles.x);
             if((mouseY > 0 && ((angle + mouseY) >= 80) && ((angle + mouseY) < 160)) ||
                 (mouseY < 0 && ((angle - mouseY) <= 280) && ((angle - mouseY) > 160)))
             {

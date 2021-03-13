@@ -11,6 +11,11 @@ public class GrappleArmAnim : MonoBehaviour
     public float aimDist = 10f;
     public float armLength = 1f;
     public float idleXOffset = 1f;
+    private Vector3 aimLoc = new Vector3(0,0,0);
+    private Vector3 focusToAimLoc = new Vector3(0,0,0);
+    private Vector3 playerToFocus = new Vector3(0,0,0);
+    private Vector3 aimDir = new Vector3(0,0,0);
+    private Vector3 handPos = new Vector3(0,0,0);
     // Start is called before the first frame update
     void Start()
     {
@@ -22,19 +27,31 @@ public class GrappleArmAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 aimLoc = getAimLoc();
-        transform.position = getOutstrechedHandPos(aimLoc);
+        getAimLoc();
+        transform.position = getOutstrechedHandPos();
+    }
+    void OnDrawGizmos(){
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(aimLoc, 0.1f);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawRay(playerFocus.position, focusToAimLoc);
+        Gizmos.DrawRay(player.position, playerToFocus);
+        Gizmos.DrawRay(player.position, aimDir);
+        Gizmos.DrawSphere(handPos, 0.1f);
     }
 
-    private Vector3 getAimLoc(){
+    private void getAimLoc(){
         Vector3 retDir = playerFocus.position - cam.position;
         retDir.Normalize();
-        return (retDir * aimDist) + playerFocus.position;
+        Vector3 loc = (retDir * aimDist) + playerFocus.position;
+        aimLoc = loc;
     }
 
-    private Vector3 getOutstrechedHandPos(Vector3 aimLoc){
-        Vector3 aimDir = (aimLoc - player.position).normalized;
-        Vector3 handPos = aimDir * armLength;
+    private Vector3 getOutstrechedHandPos(){
+        focusToAimLoc = aimLoc - playerFocus.position;
+        playerToFocus = playerFocus.position - player.position; 
+        aimDir = (focusToAimLoc + playerToFocus).normalized;
+        handPos = (aimDir * armLength) + player.position;
         handPos = new Vector3(handPos.x + idleXOffset, handPos.y, handPos.z);
         return handPos;
     }

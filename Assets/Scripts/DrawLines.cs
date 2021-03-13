@@ -8,6 +8,7 @@ public class DrawLines : MonoBehaviour
     private GameObject LineGeneratorPrefab;
     private AudioManager audioManager;
     public Transform PlayerTransform;
+    public Transform RightHand;
     public Transform CameraTransform;
     public Transform reticalPosition;
     public int rayLength;
@@ -115,7 +116,7 @@ public class DrawLines : MonoBehaviour
         newLineGen = Instantiate(LineGeneratorPrefab);
         lRend = newLineGen.GetComponent<LineRenderer>();
 
-        lRend.SetPosition(0, PlayerTransform.position);
+        lRend.SetPosition(0, RightHand.position);
         lRend.SetPosition(1, grapplePoint);
         grappleDir = grapplePoint - PlayerTransform.position;
         Debug.Log(grapplePoint);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1627591976684934315}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5182189763154710908}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!218 &1627591976684934316
 Terrain:
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 1627591976858976490}
   m_Layer: 0
   m_Name: Terrain_(-1524.0, -138.0, -502.0)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 1627591977001421713}
   m_Layer: 0
   m_Name: Terrain_(476.0, -138.0, 498.0)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 1627591977691948546}
   m_Layer: 0
   m_Name: Terrain_(-524.0, -138.0, -1502.0)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 1627591977759659173}
   m_Layer: 0
   m_Name: Terrain_(-524.0, -138.0, 498.0)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 1627591977807400152}
   m_Layer: 0
   m_Name: Terrain_(-1524.0, -138.0, -1502.0)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 1627591977882203597}
   m_Layer: 0
   m_Name: Terrain_(476.0, -138.0, -1502.0)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 1627591978047663901}
   m_Layer: 0
   m_Name: Terrain_(476.0, -138.0, -502.0)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 1627591978369369971}
   m_Layer: 0
   m_Name: Terrain_(-1524.0, -138.0, 498.0)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -695,9 +695,10 @@ GameObject:
   - component: {fileID: 7388257805802074329}
   - component: {fileID: 5847790805218623356}
   - component: {fileID: 8557808549282515894}
+  - component: {fileID: 1171529721763427811}
   m_Layer: 0
   m_Name: Water
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -714,7 +715,7 @@ Transform:
   m_LocalScale: {x: 100000, y: 100000, z: 100}
   m_Children: []
   m_Father: {fileID: 5182189763154710908}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5847790805218623356
 MeshFilter:
@@ -765,6 +766,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1171529721763427811
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7909321471135492707}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -462981019419857548, guid: 4c5228ae4cf1fc546b8ef03ca9137e23, type: 3}
 --- !u!1 &8928289322449663792
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,8 +807,8 @@ Transform:
   m_LocalPosition: {x: -2.0427175, y: -1.8794646, z: 0.9906113}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7388257805802074329}
   - {fileID: 1627591976684934317}
+  - {fileID: 7388257805802074329}
   - {fileID: 1627591977691948548}
   - {fileID: 1627591977759659175}
   - {fileID: 1627591978047663903}

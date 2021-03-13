@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77ec794f335dc541b61a55a441d8dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimDist: 10
-  armLength: 1
-  idleXOffset: 1
+  aimDist: 5
+  armLength: 3
+  idleXOffset: 2
 --- !u!1 &2400494483438125450
 GameObject:
   m_ObjectHideFlags: 0

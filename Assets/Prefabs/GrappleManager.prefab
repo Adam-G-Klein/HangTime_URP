@@ -45,12 +45,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LineGeneratorPrefab: {fileID: 8286546586251193630, guid: 97041f454e5714243838e60b32ec09ad, type: 3}
   PlayerTransform: {fileID: 0}
+  RightHand: {fileID: 0}
   CameraTransform: {fileID: 0}
   reticalPosition: {fileID: 0}
   rayLength: 100
-  range: 100
-  aimAssit: 2
+  range: 30
+  aimAssit: 5
   SelectedMaterial:
   - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   UnselectedMaterial:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 027cb3d3d7dc79d41ad763e01759de07, type: 2}
