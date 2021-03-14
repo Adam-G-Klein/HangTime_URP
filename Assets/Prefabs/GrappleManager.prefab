@@ -48,9 +48,9 @@ MonoBehaviour:
   CameraTransform: {fileID: 0}
   reticalPosition: {fileID: 0}
   rayLength: 100
-  range: 100
-  aimAssit: 2
+  range: 30
+  aimAssist: 2
   SelectedMaterial:
-  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -876546973899608171, guid: 1222f46ab4d71bd4bb4499931eaf8da2, type: 3}
   UnselectedMaterial:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -876546973899608171, guid: 283de28b60a076747b5b2a7067b91fa9, type: 3}

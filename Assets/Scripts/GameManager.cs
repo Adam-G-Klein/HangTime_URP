@@ -10,12 +10,16 @@ public class GameManager : MonoBehaviour
     public GameObject controls;
     public GameObject pause;
     public Slider senseSlider;
-    private GameObject grappleManager;
+    public Slider aimAssistSlider;
+    private DrawLines grappleManager;
     private string previousScreen;
+    private ActionCameraController cameraController;
+    public Toggle yAxisInvertButton;
     void Start()
     {
         resetGame();
-        grappleManager = GameObject.Find("GrappleManager");
+        grappleManager = GameObject.Find("GrappleManager").GetComponent<DrawLines>();
+        cameraController = GameObject.Find("Main Camera").GetComponent<ActionCameraController>();
     }
 
     // Update is called once per frame
@@ -52,7 +56,7 @@ public class GameManager : MonoBehaviour
         controls.SetActive(false);
         pause.SetActive(false);              
         // wherever actual game loop is
-        grappleManager.GetComponent<DrawLines>().setGameStarted(true);
+        grappleManager.setGameStarted(true);
         Time.timeScale = 1.0f; 
     }
     public void showControlMenuFromStartMenu()
@@ -98,15 +102,24 @@ public class GameManager : MonoBehaviour
         controls.SetActive(false);
         pause.SetActive(true);          
         // wherever actual game loop is
-        grappleManager.GetComponent<DrawLines>().setGameStarted(false);   
+        grappleManager.setGameStarted(false);   
         Time.timeScale = 0.0f;
     }
     public void updateSensitivity()
     {
-        GameObject.Find("Main Camera").GetComponent<ActionCameraController>().setSensitivity(senseSlider.value);   
+        cameraController.setSensitivity(senseSlider.value);   
     }
     public void quitGame()
     {
         Application.Quit();
+    }
+    public void toggleYAxisInversion()
+    {
+        Debug.Log(yAxisInvertButton.isOn);
+        cameraController.setYAxisInversion(yAxisInvertButton.isOn);
+    }
+    public void updateAimAssist()
+    {
+        grappleManager.setAimAssist(aimAssistSlider.value);   
     }
 }

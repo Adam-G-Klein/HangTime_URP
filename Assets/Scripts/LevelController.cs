@@ -12,9 +12,11 @@ public class LevelController : MonoBehaviour
     private Vector3 spawnOffset = new Vector3(0, 2f, 0);
     private GameObject player;
     public float deathOffset = 10f;
+    private Transform newStartingPlatform;
     void Start()
     {
         curLevel = GameObject.Find("Level1");
+        newStartingPlatform = curLevel.gameObject.transform.Find("StartingPlatform");
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -30,8 +32,9 @@ public class LevelController : MonoBehaviour
             curLevel.transform.Find("StartingPlatform").transform.gameObject.SetActive(false);
             curLevel = nextLevel;
             
-            Transform newStartingPlatform = nextLevel.transform.Find("StartingPlatform").transform;
+            newStartingPlatform = nextLevel.transform.Find("StartingPlatform").transform;
             newStartingPlatform.gameObject.SetActive(true);
+            newStartingPlatform.gameObject.GetComponent<BoxCollider>().isTrigger = true;
             spawnLocation = newStartingPlatform.transform.position + spawnOffset;
             // This was simply here to test ResetCurrentLevel   
             // ResetCurrentLevel(curLevel);
@@ -43,6 +46,7 @@ public class LevelController : MonoBehaviour
     // should be called when the player dies to repawn them
     public void ResetCurrentLevel()
     {
+        newStartingPlatform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
         foreach (Transform child in curLevel.transform)
         {
             if (child.gameObject.tag == "Sphere")
@@ -59,7 +63,7 @@ public class LevelController : MonoBehaviour
     // current Measure of death for player is if they fall a certain distanec below the platform
     // for the level they are currently on. This call can later be made when they hit the water
     public void checkPlayerHeight() {
-        if (player.transform.position.y < (spawnLocation.y - spawnOffset.y - deathOffset))
+        if (player.transform.position.y < (spawnLocation.y /*- spawnOffset.y - deathOffset*/))
         {
             player.transform.GetComponent<Rigidbody>().freezeRotation = true;
             ResetCurrentLevel();
