@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject startMenu;
     public GameObject controls;
     public GameObject pause;
+    public GameObject endScreen;
     public Slider senseSlider;
     public Slider aimAssistSlider;
     private DrawLines grappleManager;
@@ -37,14 +38,17 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(false);
         startMenu.SetActive(true);
         controls.SetActive(false);
-        pause.SetActive(false);            
+        pause.SetActive(false);
+        endScreen.SetActive(false);             
     }
     public void restartGame()
     {
+        Cursor.visible = true;
         inGameUI.SetActive(false);
         startMenu.SetActive(true);
         controls.SetActive(false);
         pause.SetActive(false);
+        endScreen.SetActive(false);  
         Scene scene = SceneManager.GetActiveScene();              
         SceneManager.LoadScene(scene.name);
     }
@@ -54,8 +58,8 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(true);
         startMenu.SetActive(false);
         controls.SetActive(false);
-        pause.SetActive(false);              
-        // wherever actual game loop is
+        pause.SetActive(false);
+        endScreen.SetActive(false);               
         grappleManager.setGameStarted(true);
         Time.timeScale = 1.0f; 
     }
@@ -65,7 +69,8 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(false);
         startMenu.SetActive(false);
         controls.SetActive(true);
-        pause.SetActive(false);              
+        pause.SetActive(false);
+        endScreen.SetActive(false);               
     }
     public void showControlMenuFromPauseMenu()
     {
@@ -73,7 +78,8 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(false);
         startMenu.SetActive(false);
         controls.SetActive(true);
-        pause.SetActive(false);              
+        pause.SetActive(false);
+        endScreen.SetActive(false);                
     }
     public void leaveControlMenu()
     {
@@ -82,7 +88,8 @@ public class GameManager : MonoBehaviour
             inGameUI.SetActive(false);
             startMenu.SetActive(true);
             controls.SetActive(false);
-            pause.SetActive(false);  
+            pause.SetActive(false);
+            endScreen.SetActive(false);  
         }
         else
         {
@@ -90,24 +97,37 @@ public class GameManager : MonoBehaviour
             startMenu.SetActive(false);
             controls.SetActive(false);
             pause.SetActive(true);             
+            endScreen.SetActive(false);  
         }
                   
     }
     public void setGamePaused()
     {
-
-        Cursor.visible = false;
+        Cursor.visible = true;
         inGameUI.SetActive(false);
         startMenu.SetActive(false);
         controls.SetActive(false);
-        pause.SetActive(true);          
+        pause.SetActive(true);
+        endScreen.SetActive(false);  
+     
         // wherever actual game loop is
+        grappleManager.setGameStarted(false);   
+        Time.timeScale = 0.0f;
+    }
+    public void showEndScreen()
+    {
+        Cursor.visible = true;
+        inGameUI.SetActive(false);
+        startMenu.SetActive(false);
+        controls.SetActive(false);
+        pause.SetActive(false);
+        endScreen.SetActive(true);
         grappleManager.setGameStarted(false);   
         Time.timeScale = 0.0f;
     }
     public void updateSensitivity()
     {
-        cameraController.setSensitivity(senseSlider.value);   
+        cameraController.setSensitivity(senseSlider.value);
     }
     public void quitGame()
     {
@@ -120,6 +140,6 @@ public class GameManager : MonoBehaviour
     }
     public void updateAimAssist()
     {
-        grappleManager.setAimAssist(aimAssistSlider.value);   
+        grappleManager.setAimAssist(aimAssistSlider.value);
     }
 }

@@ -87,7 +87,7 @@ public class DrawLines : MonoBehaviour
                         }
                         lastObjectHit = curObjectHit;
                         grapplePoint = rHit.point;
-                        hitTransform .GetComponent<MeshRenderer>().materials = SelectedMaterial;
+                        hitTransform.GetComponent<MeshRenderer>().materials = SelectedMaterial;
                     }
                 }
             }
@@ -152,7 +152,6 @@ public class DrawLines : MonoBehaviour
     public void setAimAssist(float value)
     {
         aimAssist = value;
-        Debug.Log(aimAssist);
     }
     public string getCurrentGrapplingTarget()
     {

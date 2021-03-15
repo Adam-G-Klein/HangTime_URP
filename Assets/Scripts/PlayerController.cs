@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.tag == "Finish")
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().restartGame();
+            GameObject.Find("GameManager").GetComponent<GameManager>().showEndScreen();
         }
         if(other.gameObject.tag == "Water")
         {
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     private void OnTriggerEnter(Collider other) {
+        Debug.Log(other.gameObject.tag);
         if(other.gameObject.tag == "Sphere")
         {
             GameObject GM = GameObject.Find("GrappleManager");
@@ -52,6 +53,11 @@ public class PlayerController : MonoBehaviour
                 ParticleSystem ps = GameObject.Instantiate(sphereParticles, other.gameObject.transform.position, other.gameObject.transform.rotation);
                 Destroy(ps.gameObject, 1f);
             }
+        }
+        else
+        {
+            Debug.Log("here");
+            GameObject.Find("GameManager").GetComponent<GameManager>().showEndScreen();
         }
     }
 

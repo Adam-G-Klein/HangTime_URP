@@ -90,6 +90,7 @@ public class ActionCameraController : MonoBehaviour
     public void setSensitivity(float value)
     {
         playerSensitivity = value;
+        Debug.Log(playerSensitivity);
     }
     public void setYAxisInversion(bool value){
         yAxisInversion = value;
