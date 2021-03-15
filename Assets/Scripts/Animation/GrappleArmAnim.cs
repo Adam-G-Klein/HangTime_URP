@@ -16,12 +16,14 @@ public class GrappleArmAnim : MonoBehaviour
     private Vector3 playerToFocus = new Vector3(0,0,0);
     private Vector3 aimDir = new Vector3(0,0,0);
     private Vector3 handPos = new Vector3(0,0,0);
+    private bool startHasRun = false;
     // Start is called before the first frame update
     void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
         playerFocus = GameObject.FindGameObjectWithTag("PlayerFocus").transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        startHasRun = true;
     }
 
     // Update is called once per frame
@@ -31,13 +33,16 @@ public class GrappleArmAnim : MonoBehaviour
         transform.position = getOutstrechedHandPos();
     }
     void OnDrawGizmos(){
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(aimLoc, 0.1f);
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawRay(playerFocus.position, focusToAimLoc);
-        Gizmos.DrawRay(player.position, playerToFocus);
-        Gizmos.DrawRay(player.position, aimDir);
-        Gizmos.DrawSphere(handPos, 0.1f);
+        if(startHasRun) {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(aimLoc, 0.1f);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawRay(playerFocus.position, focusToAimLoc);
+            Gizmos.DrawRay(player.position, playerToFocus);
+            Gizmos.DrawRay(player.position, aimDir);
+            Gizmos.DrawSphere(handPos, 0.1f);
+        }
+
     }
 
     private void getAimLoc(){

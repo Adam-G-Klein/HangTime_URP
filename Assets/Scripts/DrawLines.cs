@@ -53,7 +53,7 @@ public class DrawLines : MonoBehaviour
             }
             if(grappling)
             {
-                lRend.SetPosition(0, PlayerTransform.position);
+                lRend.SetPosition(0, RightHand.position);
             }
         }
     }
